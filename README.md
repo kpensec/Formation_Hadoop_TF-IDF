@@ -9,8 +9,8 @@
 4. Remove useless word (based on a stopword list)
 
 Output:
-. key -> (word, document identifier)
-. value -> ONE constant
+* key -> (word, document identifier)
+* value -> ONE constant
 
 ### Reducer:
 
