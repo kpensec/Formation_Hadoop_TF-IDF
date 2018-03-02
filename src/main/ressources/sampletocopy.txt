@@ -1,0 +1,5 @@
+Hello,
+
+This is your first file to copy to HDFS ...
+
+Enjoy!
