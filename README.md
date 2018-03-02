@@ -6,9 +6,9 @@
 1. Remove non letter character
 2. Remove less than three letter words
 3. Transform all letter to lower case
-4. Remove useless word (based on a stopword list)
+4. Remove useless words (based on a stopwords list)
 
-Output:
+#### Output:
 * key -> (word, document identifier)
 * value -> ONE constant
 
