@@ -3,14 +3,10 @@ package org.formation.hadoop;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.LongWritable;
-import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
-import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.Job;
-import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
 import java.io.IOException;
 
@@ -29,6 +25,13 @@ public class WordFilteringApp {
             Configuration configuration = new Configuration();
             FileSystem fileSystem = FileSystem.newInstance(configuration);
             Path inputFilePath = new Path(args[0]);
+
+            Path[] tmpOutputFile = {
+                    new Path("tmp/TF-IDF/Job1"),
+                    new Path("tmp/TF-IDF/Job2"),
+                    new Path("tmp/TF-IDF/Job3"),
+                    new Path("tmp/TF-IDF/Job4"),
+            };
             Path outputFilePath = new Path(args[1]);
 
             if(fileSystem.exists(outputFilePath)) {
@@ -41,20 +44,19 @@ public class WordFilteringApp {
             FileInputFormat.addInputPath(job, inputFilePath);
             FileOutputFormat.setOutputPath(job, outputFilePath);
 
-            job.setOutputKeyClass(LongWritable.class);
-            job.setOutputValueClass(Text.class);
+            job.setOutputKeyClass(CustomKey.class);
+            job.setOutputValueClass(IntWritable.class);
 
-            job.setOutputFormatClass(TextOutputFormat.class);
-            job.setInputFormatClass(TextInputFormat.class);
+            //job.setOutputFormatClass(TextOutputFormat.class);
+            //job.setInputFormatClass(TextInputFormat.class);
 
             //job.setNumReduceTasks(1);
-            job.setMapperClass(WordFilter.class);
-            job.setReducerClass(Reducer.class);
+            job.setMapperClass(WordFilteringMapper.class);
+            job.setReducerClass(WordCountReduction.class);
             job.setJarByClass(WordFilteringApp.class);
 
-
-
-
+            // adding cached files:
+            job.addCacheFile(new Path("cache/TF-IDF/stopwords_en.txt").toUri());
 
             job.waitForCompletion(true);
 
