@@ -13,4 +13,4 @@
 * value -> ONE constant
 
 ### Reducer:
-
+Word count 
