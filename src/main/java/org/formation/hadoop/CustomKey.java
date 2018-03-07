@@ -23,9 +23,9 @@ public class CustomKey implements WritableComparable<CustomKey> {
 
     @Override
     public int compareTo(CustomKey rhs) {
-        int result = this.word.compareTo(rhs.word);
+        int result = this.fileName.compareTo(rhs.fileName);
         if(result == 0) {
-            result = this.fileName.compareTo(rhs.fileName);
+            result = this.word.compareTo(rhs.word);
         }
         return result;
     }
@@ -45,11 +45,6 @@ public class CustomKey implements WritableComparable<CustomKey> {
     public void set(String fileName, String word) {
         this.fileName.set(fileName);
         this.word.set(word);
-    }
-
-    public void set(CustomKey lhs) {
-        this.fileName = lhs.fileName;
-        this.word = lhs.word;
     }
 
     @Override

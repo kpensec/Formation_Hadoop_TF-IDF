@@ -24,8 +24,8 @@ public class Reduce extends Reducer<CustomKey, CustomValue, CustomKey, CustomVal
         }
 
         for ( java.util.Map.Entry<String, Integer> entry : wordCountMap.entrySet()) {
-            outKey.set(key.getFileName(), entry.getKey());
-            outValue.set(entry.getValue(), total);
+            outKey = new CustomKey(key.getFileName(), entry.getKey());
+            outValue = new CustomValue(entry.getValue(), total);
             context.write(outKey, outValue);
         }
     }
