@@ -1,11 +1,12 @@
-package org.formation.hadoop;
+package org.formation.hadoop.jobs.countFiltered;
 
 import java.io.IOException;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.mapreduce.Reducer;
+import org.formation.hadoop.CustomKey;
 
 
-public class WordCountReduction extends Reducer<CustomKey, IntWritable, CustomKey, IntWritable> {
+public class Reduce extends Reducer<CustomKey, IntWritable, CustomKey, IntWritable> {
 
     private IntWritable result = new IntWritable();
 

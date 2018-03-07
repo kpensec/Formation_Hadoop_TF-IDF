@@ -1,21 +1,21 @@
-package org.formation.hadoop;
+package org.formation.hadoop.jobs.countFiltered;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 import org.apache.hadoop.fs.Path;
+import org.formation.hadoop.CustomKey;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Stream;
 
-public class WordFilteringMapper extends Mapper<Object, Text, CustomKey, IntWritable> {
+
+public class Map extends Mapper<Object, Text, CustomKey, IntWritable> {
     private final static IntWritable ONE = new IntWritable(1);
     private CustomKey outputKey = new CustomKey();
     private Set<String> stopWords = new HashSet<String>();
